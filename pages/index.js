@@ -9,14 +9,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <nav className="absolute w-full grid grid-cols-header-mobile md:grid-cols-2">
-        <div class="px-10 lg:px-20 py-5"><img src="/Logo.png" class="max-w-100 lg:max-h-20" alt=""/></div>
-        <div class="px-10 lg:px-20 py-5 hidden md:flex justify-end items-center">
+        <div class="px-10 lg:px-20 py-5"><img src="/Logo.png" class="max-w-100 max-h-20" alt=""/></div>
+        <div class="px-10 lg:px-20 py-5 hidden justify-end items-center">{/* hidden md:flex */}
           <ul className="flex justify-end items-center">
             <a href="#" className="mx-5"><li>Sign up</li></a>
             <a href="#" className="mx-5 bg-black text-white border-black border-2 px-10 py-2 rounded-full duration-500 hover:bg-white hover:text-black"><li>Sign in</li></a>
           </ul>
         </div>
-        <div className="flex md:hidden justify-center items-center">
+        <div className="hidden justify-center items-center">{/* flex md:hidden */}
           <FontAwesomeIcon icon={['fas', 'bars']} className="w-5 m-2" />
         </div>
       </nav>
