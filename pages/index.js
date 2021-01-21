@@ -21,11 +21,11 @@ export default function Home() {
         </div>
       </nav>
       <div className="h-screen flex flex-col justify-center items-center lg:grid grid-cols-2 px-10 lg:px-20">
-        <div className="flex flex-col justify-center items-center text-lg lg:text-2xl">
+        <div className="flex flex-col justify-center items-center text-lg lg:text-2xl" data-aos="fade-right">
           <h1 className="font-bold text-2xl lg:text-4xl text-center">UNISEC Thailand</h1>
           <div class="text-center mt-5">An association that pushes space engineering in Thailand.</div>
         </div>
-        <div className="flex flex-col justify-center items-center mt-10 md:mt-0 px-10 md:px-0">
+        <div className="flex flex-col justify-center items-center mt-10 md:mt-0 px-10 md:px-0" data-aos="fade-left">
           <img src="/sideimg.svg" alt=""/>
         </div>
       </div>
@@ -40,7 +40,7 @@ export default function Home() {
             UNISEC-Global Meeting.
           </div>
           <div className="mt-10 mx-10 lg:mx-0">
-            <img src="/uniglo-image2h.jpg" className="mx-auto shadow rounded-lg" alt=""/>
+            <img src="/uniglo-image2h.jpg" className="mx-auto shadow rounded-lg" data-aos="fade" alt=""/>
           </div>
         </div>
       </div>
@@ -57,9 +57,9 @@ export default function Home() {
             micro/nano-satellite technology matures, it has spread rapidly across the academics and industry for practical application.
           </div>
           <div className="block md:grid grid-cols-3 gap-10 p-10">
-            <img class="my-10 md:my-0" src="/MIC6_ICECubes_1st_MUSA.jpg" alt=""/>
-            <img class="my-10 md:my-0" src="/MIC6_ICECubes_student_MARGE.jpg" alt=""/>
-            <img class="my-10 md:my-0" src="/MIC6_iSEEP_1st_SMoSiS.jpg" alt=""/>
+            <img class="my-10 md:my-0" src="/MIC6_ICECubes_1st_MUSA.jpg" data-aos="fade-right" alt=""/>
+            <img class="my-10 md:my-0" src="/MIC6_ICECubes_student_MARGE.jpg" data-aos="fade" alt=""/>
+            <img class="my-10 md:my-0" src="/MIC6_iSEEP_1st_SMoSiS.jpg" data-aos="fade-left" alt=""/>
           </div>
         </div>
       </div>
@@ -70,24 +70,24 @@ export default function Home() {
             <h2 className="text-xl font-medium">Schedule</h2>
             <div className="max-w-3xl mx-auto">
               <div className="grid grid-cols-2 pt-10">
-                <div>Oct 23, 2020</div>
-                <div>Restart announcement</div>
+                <div data-aos="fade-right">Oct 23, 2020</div>
+                <div data-aos="fade-left">Restart announcement</div>
               </div>
               <div className="grid grid-cols-2 pt-10">
-                <div>July 2021</div>
-                <div>Deadline of Abstract submission</div>
+                <div data-aos="fade-right">July 2021</div>
+                <div data-aos="fade-left">Deadline of Abstract submission</div>
               </div>
               <div className="grid grid-cols-2 pt-10">
-                <div>August 2021</div>
-                <div>Notification of Finalists</div>
+                <div data-aos="fade-right">August 2021</div>
+                <div data-aos="fade-left">Notification of Finalists</div>
               </div>
               <div className="grid grid-cols-2 pt-10">
-                <div>September 2021</div>
-                <div>Deadline of Final Paper submission</div>
+                <div data-aos="fade-right">September 2021</div>
+                <div data-aos="fade-left">Deadline of Final Paper submission</div>
               </div>
               <div className="grid grid-cols-2 pt-10">
-                <div>November 2021</div>
-                <div>Final presentation</div>
+                <div data-aos="fade-right">November 2021</div>
+                <div data-aos="fade-left">Final presentation</div>
               </div>
             </div>  
           </div>
@@ -105,12 +105,12 @@ export default function Home() {
         <div className="container mx-auto py-20">
           <h1 className="text-4xl font-bold text-center mx-10 md:mx-0">Our Sponsor</h1>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-20 p-16 md:p-20 pb-10">
-            <div className="h-28 bg-gray-100 rounded-lg shadow-lg"></div>
-            <div className="h-28 bg-gray-100 rounded-lg shadow-lg"></div>
-            <div className="h-28 bg-gray-100 rounded-lg shadow-lg"></div>
-            <div className="h-28 bg-gray-100 rounded-lg shadow-lg"></div>
-            <div className="h-28 bg-gray-100 rounded-lg shadow-lg"></div>
-            <div className="h-28 bg-gray-100 rounded-lg shadow-lg"></div>
+            <div className="h-28 bg-gray-100 rounded-lg shadow-lg" data-aos="fade-up"></div>
+            <div className="h-28 bg-gray-100 rounded-lg shadow-lg" data-aos="fade-up"></div>
+            <div className="h-28 bg-gray-100 rounded-lg shadow-lg" data-aos="fade-up"></div>
+            <div className="h-28 bg-gray-100 rounded-lg shadow-lg" data-aos="fade-up"></div>
+            <div className="h-28 bg-gray-100 rounded-lg shadow-lg" data-aos="fade-up"></div>
+            <div className="h-28 bg-gray-100 rounded-lg shadow-lg" data-aos="fade-up"></div>
           </div>
         </div>
       </div>
