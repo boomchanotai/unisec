@@ -17,6 +17,7 @@ function MyApp({ Component, pageProps }) {
       easing: "ease-out-cubic",
       once: false,
       offset: 50,
+      disable: 'mobile'
     });
   }, []);
 
