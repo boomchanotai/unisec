@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Nav from "../_components/Nav";
+import Nav from "../../_components/Nav";
 
 export default function Home() {
   return (
@@ -109,6 +109,27 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div>
+        <div className="container mx-auto py-20">
+          <h1 className="text-4xl font-bold text-center mx-10 md:mx-0">
+            MIC is now open for apply!
+          </h1>
+          <div className="flex">
+            <div className="mx-auto text-black justify-center">
+              <a href="/contest/mic/apply">
+                <div className="bg-blue-unisec  w-auto p-3 mt-4 rounded-lg cursor-pointer">
+                  <div class="text-white">Apply Now!</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="bg-blue-unisec text-white">
+        <div className="container mx-auto px-20 py-10">
+          CopyRight © UNISEC Thailand, All Rights Reserved.
         </div>
       </div>
     </div>
