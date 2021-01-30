@@ -10,11 +10,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Nav />
-      <div className="h-screen flex flex-col justify-center items-center lg:grid grid-cols-2 px-10 lg:px-20">
+      <div className="h-screen flex flex-col justify-center items-center lg:grid grid-cols-2 px-10 lg:px-20 pt-20">
         <div
           className="flex flex-col justify-center items-center text-lg lg:text-2xl"
           data-aos="fade-right">
           <div className="text-center mt-5">
+            <h1 className="font-bold text-3xl mb-5">UNISEC Thailand</h1>
             University Space Engineering Consortium Thailand
           </div>
         </div>

@@ -7,9 +7,9 @@ export const googleSigin = (cb) => {
     .signInWithPopup(provider)
     .then((result) => {
       var user = result.user;
-      console.log(user);
-      localStorage.setItem("unisec-mic-uid", user.uid);
-      localStorage.setItem("unisec-mic-name", user.displayName);
+      // console.log(user);
+      // localStorage.setItem("unisec-mic-uid", user.uid);
+      // localStorage.setItem("unisec-mic-name", user.displayName);
       cb();
     })
     .catch((error) => {});

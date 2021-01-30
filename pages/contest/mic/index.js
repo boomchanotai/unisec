@@ -11,7 +11,7 @@ export default function Home() {
       </Head>
       <Nav></Nav>
       <div>
-        <div className="container mx-auto py-20 mt-5">
+        <div className="container mx-auto pt-40 pb-20">
           <h1 className="text-4xl font-bold text-center mx-10 md:mx-0">
             Mission Idea Contest
           </h1>
@@ -86,27 +86,27 @@ export default function Home() {
           <div className="my-10 mx-10 md:mx-40">
             <h2 className="text-xl font-medium">Requirements</h2>
             <div className="max-w-3xl mx-auto text-black">
-              <div className="bg-white my-5 flex flex-row items-center px-6 py-1 rounded-full hover:bg-gray-200 cursor-pointer">
+              <a href="http://www.spacemic.net/pdf/mic7/MIC7_constraints.pdf" target="_blank" className="bg-white my-5 flex flex-row items-center px-6 py-1 rounded-full hover:bg-gray-200 cursor-pointer">
                 <FontAwesomeIcon
                   icon={["fas", "file-pdf"]}
                   className="w-5 m-2"
                 />{" "}
                 <span className="pl-5">Constraints</span>
-              </div>
-              <div className="bg-white my-5 flex flex-row items-center px-6 py-1 rounded-full hover:bg-gray-200 cursor-pointer">
+              </a>
+              <a href="http://www.spacemic.net/pdf/mic7/MIC7_abstract_template.pdf" target="_blank" className="bg-white my-5 flex flex-row items-center px-6 py-1 rounded-full hover:bg-gray-200 cursor-pointer">
                 <FontAwesomeIcon
                   icon={["fas", "file-pdf"]}
                   className="w-5 m-2"
                 />{" "}
                 <span className="pl-5">Abstract template</span>
-              </div>
-              <div className="bg-white my-5 flex flex-row items-center px-6 py-1 rounded-full hover:bg-gray-200 cursor-pointer">
+              </a>
+              <a href="http://www.spacemic.net/pdf/mic7/MIC7_abstract_template.doc" download className="bg-white my-5 flex flex-row items-center px-6 py-1 rounded-full hover:bg-gray-200 cursor-pointer">
                 <FontAwesomeIcon
                   icon={["fas", "file-word"]}
                   className="w-5 m-2"
                 />{" "}
                 <span className="pl-5">Abstract template</span>
-              </div>
+              </a>
             </div>
           </div>
         </div>
@@ -120,7 +120,7 @@ export default function Home() {
             <div className="mx-auto text-black justify-center">
               <a href="/contest/mic/apply">
                 <div className="bg-blue-unisec  w-auto p-3 mt-4 rounded-lg cursor-pointer">
-                  <div class="text-white">Apply Now!</div>
+                  <div className="text-white">Apply Now!</div>
                 </div>
               </a>
             </div>

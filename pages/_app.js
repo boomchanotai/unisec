@@ -10,7 +10,16 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 
 library.add(fas)
 
+import {Provider} from 'react-redux';
+import withRedux from "next-redux-wrapper";
+import store from '../store'
+
+import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from '../store/actions';
+
 function MyApp({ Component, pageProps }) {
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     AOS.init({
@@ -19,9 +28,23 @@ function MyApp({ Component, pageProps }) {
       offset: 50,
       disable: 'mobile'
     });
+
+    // if (typeof localStorage !== 'undefined' && localStorage.getItem('unisec-mic-name')) {
+    //   dispatch(setUser({
+    //     uid : localStorage.getItem('unisec-mic-uid'),
+    //     name : localStorage.getItem('unisec-mic-name')
+    //   }));
+    // }
+    
   }, []);
 
-  return <Component {...pageProps} />
+  return (
+    <Provider store={store}>
+      <Component {...pageProps} />
+    </Provider>
+  )
 }
 
-export default MyApp
+const makeStore = () => store;
+
+export default withRedux(makeStore)(MyApp);
