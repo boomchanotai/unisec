@@ -51,15 +51,17 @@ export default function Home({ isLoggedIn }) {
           .then((snap) => {
             if (snap.val()) {
               let register_info = snap.val();
-              if (register_info.teamname && register_info.member === null) {
+              console.log(register_info.member)
+              if (register_info.teamname && typeof register_info.member === "undefined") {
                 setTeamname(register_info.teamname);
                 setStep(1);
                 member.push(userBlueprint);
                 setMember(member);
               } else if (register_info.teamname && register_info.member) {
                 setTeamname(register_info.teamname);
-                setStep(1);
+                setStep(2);
                 setMember(register_info.member);
+                setTeamMemberCounter(register_info.member.length);
                 console.log("register_info.teamname && register_info.member");
               }
             }
@@ -107,7 +109,13 @@ export default function Home({ isLoggedIn }) {
         teamname: "Boom",
         member: member,
       });
+    setStep(2)
   };
+
+  const handleAbstractSubmission = (e) => {
+    e.preventDefault();
+    console.log("Abstract Submission !")
+  }
 
   if (user === null) {
     return (
@@ -269,6 +277,7 @@ export default function Home({ isLoggedIn }) {
                     member[i].gender = e.target.value;
                     setMember(member);
                   }}>
+                  <option selected value=""> -- select an gender -- </option>
                   <option selected={member[i]?.gender === "Male"} value="Male">
                     Male
                   </option>
@@ -287,13 +296,14 @@ export default function Home({ isLoggedIn }) {
               <div className="my-2">
                 Education :{" "}
                 <select
-                  className="border-2 border-gray-200 pl-4 rounded-lg w-36"
+                  className="border-2 border-gray-200 pl-4 rounded-lg"
                   required
                   defaultValue={member[i]?.education}
                   onChange={(e) => {
                     member[i].education = e.target.value;
                     setMember(member);
                   }}>
+                  <option selected value=""> -- select an education -- </option>
                   <option
                     selected={member[i]?.education === "Grade_10"}
                     value="Grade_10">
@@ -473,14 +483,6 @@ export default function Home({ isLoggedIn }) {
                     </button>
                   </div>
                 </form>
-                <div>
-                  <button
-                    onClick={() =>
-                      console.log(member[0].gender == "Female" ? true : false)
-                    }>
-                    dasd
-                  </button>
-                </div>
               </div>
             </div>
           </div>
@@ -491,6 +493,63 @@ export default function Home({ isLoggedIn }) {
           </div>
         </div>
       );
+    } else if (step == 2) {
+      return(
+        <div className="min-h-screen">
+          <Head>
+            <title>Mission Idea Contest Application | UNISEC Thailand</title>
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
+          <Nav />
+          <div className="container mx-auto mt-5 pt-40 pb-20">
+            <div>
+              <img src="/progressbar.svg" className="w-100 mx-auto" alt="" />
+            </div>
+            <div className="my-10">
+              <h2 className="font-bold text-2xl">Step 3 : Abstract Submission</h2>
+              <div className="py-20 text-center">
+                <form onSubmit={handleAbstractSubmission}>
+                  <div className="my-4">
+                    <h3 class="font-semibold inline">Abstract : </h3>
+                    <div className="text-sm inline"><input required type="file" className="bg-white py-2 px-6 border-2 border-gray-300 rounded-full" /></div>
+                  </div>
+                  <div className="my-4">
+                    <h3 className="font-semibold inline">Video Presentation : </h3>
+                    <div className="text-sm inline"><input required type="text" placeholder="Fill URL for your video presentation" className="bg-white py-2 px-6 border-2 border-gray-300 rounded-full w-96"/></div>
+                    <div className="text-gray-400 text-sm mt-2">* Upload your video on youtube or google drive and put your URL here.</div>
+                  </div>
+                  <div className="text-center mt-16">
+                    <button
+                      type="button"
+                      onClick={() => setStep(1)}
+                      className="px-8 py-2 bg-blue-unisec text-white rounded-full hover:bg-blue-900 mx-2">
+                      <FontAwesomeIcon
+                        icon={["fas", "chevron-left"]}
+                        className="w-5"
+                      />{" "}
+                      Previous
+                    </button>
+                    <button
+                      type="submit"
+                      className="px-8 py-2 bg-blue-unisec text-white rounded-full hover:bg-blue-900 mx-2">
+                      Next{" "}
+                      <FontAwesomeIcon
+                        icon={["fas", "chevron-right"]}
+                        className="w-5"
+                      />
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div className="absolute bottom-0 w-full bg-blue-unisec text-white">
+            <div className="container mx-auto px-20 py-10">
+              CopyRight © UNISEC Thailand, All Rights Reserved.
+            </div>
+          </div>
+        </div>
+      )
     }
   }
 }
