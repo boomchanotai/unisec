@@ -292,7 +292,12 @@ export default function Home({ isLoggedIn }) {
             </div>
           </div>
         </div>
-        <Footer />
+
+        <div className="w-full bottom-0 fixed bg-blue-unisec text-white">
+          <div className="container mx-auto px-20 py-10">
+            CopyRight © UNISEC Thailand, All Rights Reserved.
+          </div>
+        </div>
       </div>
     );
   } else if (user.name !== null) {
