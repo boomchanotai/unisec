@@ -29,6 +29,8 @@ export default function Home({ isLoggedIn }) {
   const [abstractFile, setAbstractFile] = useState(null);
   const [presentationVideo, setPresentationVideo] = useState(null);
   const [filename, setFilename] = useState([""]);
+  const [abstractURL, setAbstractURL] = useState(null);
+  const [videoURL, setVideoURL] = useState(null);
   const suffix = ["st", "nd", "rd", "th"];
   const userBlueprint = {
     name: null,
@@ -107,6 +109,43 @@ export default function Home({ isLoggedIn }) {
     fetchData(false);
   }, [step]);
 
+  useEffect(() => {
+    if (step == 3) {
+      firebase
+        .storage()
+        .ref(
+          "mic_register/" +
+            user.uid +
+            "/Abstract_" +
+            teamname +
+            "." +
+            filename.abstract_path.split(".")[
+              filename.abstract_path.split(".").length - 1
+            ]
+        )
+        .getDownloadURL()
+        .then((url) => {
+          setAbstractURL(url);
+        });
+      firebase
+        .storage()
+        .ref(
+          "mic_register/" +
+            user.uid +
+            "/VideoPresentation_" +
+            teamname +
+            "." +
+            filename.videopresentation_path.split(".")[
+              filename.videopresentation_path.split(".").length - 1
+            ]
+        )
+        .getDownloadURL()
+        .then((url) => {
+          setVideoURL(url);
+        });
+    }
+  }, [step]);
+
   const handleSubmmitedNamedFormed = (e) => {
     e.preventDefault();
     const uuid = user.uid;
@@ -150,11 +189,29 @@ export default function Home({ isLoggedIn }) {
     if (abstractFile != null && presentationVideo != null) {
       firebase
         .storage()
-        .ref("mic_register/" + user.uid + "/Abstract_" + teamname)
+        .ref(
+          "mic_register/" +
+            user.uid +
+            "/Abstract_" +
+            teamname +
+            "." +
+            abstractFile.name.split(".")[
+              abstractFile.name.split(".").length - 1
+            ]
+        )
         .put(abstractFile);
       firebase
         .storage()
-        .ref("mic_register/" + user.uid + "/VideoPresentation_" + teamname)
+        .ref(
+          "mic_register/" +
+            user.uid +
+            "/VideoPresentation_" +
+            teamname +
+            "." +
+            presentationVideo.name.split(".")[
+              presentationVideo.name.split(".").length - 1
+            ]
+        )
         .put(presentationVideo);
 
       firebase
@@ -293,8 +350,7 @@ export default function Home({ isLoggedIn }) {
                 Name :{" "}
                 <input
                   onChange={(e) => {
-                    let _member = member;
-                    _member[i].name = e.target.value;
+                    member[i].name = e.target.value;
                     setMember(member);
                   }}
                   defaultValue={member[i]?.name}
@@ -724,13 +780,19 @@ export default function Home({ isLoggedIn }) {
                     <div className="mx-4">
                       <div>
                         <span className="font-semibold">Abstract Document</span>{" "}
-                        : {filename.abstract_path}
+                        :{" "}
+                        <a href={abstractURL} class="text-blue-700">
+                          {filename.abstract_path}
+                        </a>
                       </div>
                       <div>
                         <span className="font-semibold">
                           Video Presentation
                         </span>{" "}
-                        : {filename.videopresentation_path}
+                        :{" "}
+                        <a href={videoURL} class="text-blue-700">
+                          {filename.videopresentation_path}
+                        </a>
                       </div>
                     </div>
                   </div>
