@@ -136,12 +136,16 @@ export default function Home() {
         </div>
       </div>
       <div className="bg-blue-unisec text-white">
-        <div className="container mx-auto py-20 grid grid-cols-2">
-          <div className="flex flex-col justify-center items-center">
+        <div className="container mx-auto py-20 block lg:grid grid-cols-2">
+          <div className="hidden lg:flex flex-col justify-center items-center">
             <div className="text-right">
-              <h1 className="font-bold text-3xl">Join Our Discord !</h1>
+              <h1 className="font-bold text-3xl w-full">Join Our Discord !</h1>
               <h2 classNAme="font-medium text-lg">Find your teammate and join The 7<sup>th</sup> Mission Idea Contest together.</h2>
             </div>
+          </div>
+          <div className="block lg:hidden text-center px-10 mb-10">
+            <h1 className="font-bold text-3xl w-full mb-4">Join Our Discord !</h1>
+            <h2 classNAme="font-medium text-lg">Find your teammate and join The 7<sup>th</sup> Mission Idea Contest together.</h2>
           </div>
           <div className="flex flex-col justify-center items-center">
             <img src="/discord_unisec.png" alt=""/>
