@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import firebase from "firebase/app";
 import "firebase/database";
+import "firebase/storage";
 import startFirebase from "../../../src/services/startFirebase";
 
 startFirebase();
@@ -17,6 +18,9 @@ export default function Home({ isLoggedIn }) {
   const [teamMemberCounter, setTeamMemberCounter] = useState(1);
   const [step, setStep] = useState(0);
   const [member, setMember] = useState([]);
+  const [abstractFile, setAbstractFile] = useState(null);
+  const [presentationVideo, setPresentationVideo] = useState(null)
+  const [filename, setFilename] = useState([""])
 
   const suffix = ["st", "nd", "rd", "th"];
   const userBlueprint = {
@@ -51,18 +55,26 @@ export default function Home({ isLoggedIn }) {
           .then((snap) => {
             if (snap.val()) {
               let register_info = snap.val();
-              console.log(register_info.member)
-              if (register_info.teamname && typeof register_info.member === "undefined") {
+              console.log(register_info.files)
+              if (register_info.submit) {
                 setTeamname(register_info.teamname);
-                setStep(1);
-                member.push(userBlueprint);
-                setMember(member);
+                setStep(4);
+              } else if (register_info.teamname && register_info.member && register_info.files.abstract_path) {
+                setTeamname(register_info.teamname);
+                setMember(register_info.member);
+                setTeamMemberCounter(register_info.member.length);
+                setFilename(register_info.files)
+                setStep(3);
               } else if (register_info.teamname && register_info.member) {
                 setTeamname(register_info.teamname);
                 setStep(2);
                 setMember(register_info.member);
                 setTeamMemberCounter(register_info.member.length);
-                console.log("register_info.teamname && register_info.member");
+              } else if (register_info.teamname && typeof register_info.member === "undefined") {
+                setTeamname(register_info.teamname);
+                setStep(1);
+                member.push(userBlueprint);
+                setMember(member);
               }
             }
           });
@@ -104,17 +116,27 @@ export default function Home({ isLoggedIn }) {
     e.preventDefault();
     firebase
       .database()
-      .ref("mic_register/" + user.uid)
-      .set({
-        teamname: "Boom",
-        member: member,
-      });
+      .ref("mic_register/" + user.uid + "/member")
+      .set(member);
     setStep(2)
   };
 
   const handleAbstractSubmission = (e) => {
     e.preventDefault();
-    console.log("Abstract Submission !")
+    console.log(abstractFile);
+    firebase.storage().ref("mic_register/" + user.uid + "/Abstract_" + teamname).put(abstractFile);
+    firebase.storage().ref("mic_register/" + user.uid + "/VideoPresentation_" + teamname).put(presentationVideo);
+
+    firebase.database().ref("mic_register/" + user.uid + "/files/abstract_path").set(abstractFile.name);
+    firebase.database().ref("mic_register/" + user.uid + "/files/videopresentation_path").set(presentationVideo.name);
+    setStep(3)
+    console.log("Abstract Submission !");
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    firebase.database().ref("mic_register/" + user.uid + "/submit").set(true);
+    setStep(4);
   }
 
   if (user === null) {
@@ -277,7 +299,7 @@ export default function Home({ isLoggedIn }) {
                     member[i].gender = e.target.value;
                     setMember(member);
                   }}>
-                  <option selected value=""> -- select an gender -- </option>
+                  <option selected defaultValue=""> -- select an gender -- </option>
                   <option selected={member[i]?.gender === "Male"} value="Male">
                     Male
                   </option>
@@ -303,7 +325,7 @@ export default function Home({ isLoggedIn }) {
                     member[i].education = e.target.value;
                     setMember(member);
                   }}>
-                  <option selected value=""> -- select an education -- </option>
+                  <option selected defaultValue=""> -- select an education -- </option>
                   <option
                     selected={member[i]?.education === "Grade_10"}
                     value="Grade_10">
@@ -510,12 +532,12 @@ export default function Home({ isLoggedIn }) {
               <div className="py-20 text-center">
                 <form onSubmit={handleAbstractSubmission}>
                   <div className="my-4">
-                    <h3 class="font-semibold inline">Abstract : </h3>
-                    <div className="text-sm inline"><input required type="file" className="bg-white py-2 px-6 border-2 border-gray-300 rounded-full" /></div>
+                    <h3 className="font-semibold inline">Abstract : </h3>
+                    <div className="text-sm inline"><input onChange={e => setAbstractFile(e.target.files[0])} required type="file" accept=".pdf" className="bg-white py-2 px-6 border-2 border-gray-300 rounded-full" /></div>
                   </div>
                   <div className="my-4">
                     <h3 className="font-semibold inline">Video Presentation : </h3>
-                    <div className="text-sm inline"><input required type="text" placeholder="Fill URL for your video presentation" className="bg-white py-2 px-6 border-2 border-gray-300 rounded-full w-96"/></div>
+                    <div className="text-sm inline"><input onChange={e => setPresentationVideo(e.target.files[0])} required type="file" accept="video/*" placeholder="Fill URL for your video presentation" className="bg-white py-2 px-6 border-2 border-gray-300 rounded-full w-96"/></div>
                     <div className="text-gray-400 text-sm mt-2">* Upload your video on youtube or google drive and put your URL here.</div>
                   </div>
                   <div className="text-center mt-16">
@@ -541,6 +563,114 @@ export default function Home({ isLoggedIn }) {
                   </div>
                 </form>
               </div>
+            </div>
+          </div>
+          <div className="absolute bottom-0 w-full bg-blue-unisec text-white">
+            <div className="container mx-auto px-20 py-10">
+              CopyRight © UNISEC Thailand, All Rights Reserved.
+            </div>
+          </div>
+        </div>
+      )
+    } else if (step == 3) {
+      
+      return(
+        <div className="min-h-screen">
+          <Head>
+            <title>Mission Idea Contest Application | UNISEC Thailand</title>
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
+          <Nav />
+          <div className="container mx-auto mt-5 pt-40 pb-20">
+            <div>
+              <img src="/progressbar.svg" className="w-100 mx-auto" alt="" />
+            </div>
+            <div className="my-10">
+              <h2 className="font-bold text-2xl">Step 4 : Summary Information</h2>
+              <div className="py-10 pl-10 text-left">
+                <div>
+                  <div>
+                    <h2 className="font-semibold inline">Team Name : </h2>
+                    <div className="inline">{teamname}</div>
+                  </div>
+                  <div>
+                    <h2 className="font-semibold inline">Members : </h2>
+                    <div>
+                      {member.map(element => (
+                        <div key={element.name} className="m-2">
+                          <div><span className="font-semibold">{element.name}</span></div>
+                          <div className="mx-4">
+                            <div><span className="font-semibold">Birth</span> : {element.birth}</div>
+                            <div><span className="font-semibold">Gender</span> : {element.gender}</div>
+                            <div><span className="font-semibold">Education Level</span> : {element.education}</div>
+                            <div><span className="font-semibold">School / University</span> : {element.university}</div>
+                            <div><span className="font-semibold">Faculty / Cirriculum</span> : {element.faculty}</div>
+                            <div><span className="font-semibold">Address</span> : {element.address}</div>
+                            <div><span className="font-semibold">Tel.</span> : {element.tel}</div>
+                            <div><span className="font-semibold">Email</span> : {element.email}</div>
+                            <div><span className="font-semibold">Facebook</span> : {element.facebook}</div>
+                            <div><span className="font-semibold">Address</span> : {element.address}</div>
+                            <h2 className="font-semibold">Emergency :</h2>
+                            <div className="mx-4">
+                              <div><span className="font-semibold">Name</span> : {element.emergency.name}</div>
+                              <div><span className="font-semibold">Tel.</span> : {element.emergency.tel}</div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <h2 className="font-semibold">Files :</h2>
+                    <div className="mx-4">
+                      <div><span className="font-semibold">Abstract Document</span> : {filename.abstract_path}</div>
+                      <div><span className="font-semibold">Video Presentation</span> : {filename.videopresentation_path}</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-center mt-16">
+                  <button
+                    type="button"
+                    onClick={() => setStep(2)}
+                    className="px-8 py-2 bg-blue-unisec text-white rounded-full hover:bg-blue-900 mx-2">
+                    <FontAwesomeIcon
+                      icon={["fas", "chevron-left"]}
+                      className="w-5"
+                    />{" "}
+                    Previous
+                  </button>
+                  <button
+                    onClick={handleSubmit}
+                    type="submit"
+                    className="px-8 py-2 bg-blue-unisec text-white rounded-full hover:bg-blue-900 mx-2">
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="w-full bg-blue-unisec text-white">
+            <div className="container mx-auto px-20 py-10">
+              CopyRight © UNISEC Thailand, All Rights Reserved.
+            </div>
+          </div>
+        </div>
+      )
+    } else if (step == 4) {
+      return (
+        <div className="h-screen">
+          <Head>
+            <title>Mission Idea Contest Application | UNISEC Thailand</title>
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
+          <Nav />
+          <div className="container mx-auto mt-5 pt-40 pb-20">
+            <div>
+              <img src="/progressbar.svg" className="w-100 mx-auto" alt="" />
+            </div>
+            <div className="my-20 text-center">
+              <h1 className="font-bold text-2xl">Thanks for submitted your project !</h1>
+              <h2 className="font-bold text-xl mt-4">Good Luck !</h2>
             </div>
           </div>
           <div className="absolute bottom-0 w-full bg-blue-unisec text-white">
