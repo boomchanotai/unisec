@@ -60,26 +60,34 @@ export default function Home() {
             <h2 className="text-xl font-medium">Schedule</h2>
             <div className="max-w-3xl mx-auto">
               <div className="grid grid-cols-2 pt-10">
-                <div data-aos="fade-right">Oct 23, 2020</div>
-                <div data-aos="fade-left">Restart announcement</div>
+                <div data-aos="fade-right">Feb 2, 2021</div>
+                <div data-aos="fade-left">Open Registration</div>
               </div>
               <div className="grid grid-cols-2 pt-10">
-                <div data-aos="fade-right">July 2021</div>
-                <div data-aos="fade-left">Deadline of Abstract submission</div>
+                <div data-aos="fade-right">Mar 14, 2021</div>
+                <div data-aos="fade-left">Close Registration and Abstract Submission</div>
               </div>
               <div className="grid grid-cols-2 pt-10">
-                <div data-aos="fade-right">August 2021</div>
-                <div data-aos="fade-left">Notification of Finalists</div>
+                <div data-aos="fade-right">Mar 28, 2021</div>
+                <div data-aos="fade-left">Semi-Finalist Announcement 14 Teams</div>
               </div>
               <div className="grid grid-cols-2 pt-10">
-                <div data-aos="fade-right">September 2021</div>
+                <div data-aos="fade-right">Apr 25, 2021</div>
                 <div data-aos="fade-left">
-                  Deadline of Final Paper submission
+                  Semi-Final Submission
                 </div>
               </div>
               <div className="grid grid-cols-2 pt-10">
-                <div data-aos="fade-right">November 2021</div>
-                <div data-aos="fade-left">Final presentation</div>
+                <div data-aos="fade-right">May 9, 2021</div>
+                <div data-aos="fade-left">Finalist Announcement 5 Teams</div>
+              </div>
+              <div className="grid grid-cols-2 pt-10">
+                <div data-aos="fade-right">Jun 9, 2021</div>
+                <div data-aos="fade-left">Final Submission</div>
+              </div>
+              <div className="grid grid-cols-2 pt-10">
+                <div data-aos="fade-right">Jun 28, 2021</div>
+                <div data-aos="fade-left">Final Presentation @NARIT, Chiang Mai</div>
               </div>
             </div>
           </div>
@@ -125,6 +133,25 @@ export default function Home() {
               </a>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="bg-blue-unisec text-white">
+        <div className="container mx-auto py-20 grid grid-cols-2">
+          <div className="flex flex-col justify-center items-center">
+            <div className="text-right">
+              <h1 className="font-bold text-3xl">Join Our Discord !</h1>
+              <h2 classNAme="font-medium text-lg">Find your teammate and join The 7<sup>th</sup> Mission Idea Contest together.</h2>
+            </div>
+          </div>
+          <div className="flex flex-col justify-center items-center">
+            <img src="/discord_unisec.png" alt=""/>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div className="container mx-auto py-20 text-center">
+          <h1 className="font-bold text-4xl">Special Events</h1>
+          <div className="mt-10">Coming Soon !</div>
         </div>
       </div>
       <div className="bg-blue-unisec text-white">
