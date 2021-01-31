@@ -20,19 +20,19 @@ export default function Home({ isLoggedIn }) {
 
   const suffix = ["st", "nd", "rd", "th"];
   const userBlueprint = {
-    name: "",
-    birth: "",
-    gender: "",
-    education: "",
-    university: "",
-    faculty: "",
-    tel: "",
-    email: "",
-    facebook: "",
-    address: "",
+    name: null,
+    birth: null,
+    gender: null,
+    education: null,
+    university: null,
+    faculty: null,
+    tel: null,
+    email: null,
+    facebook: null,
+    address: null,
     emergency: {
-      name: "",
-      tel: "",
+      name: null,
+      tel: null,
     },
   };
 
@@ -51,10 +51,16 @@ export default function Home({ isLoggedIn }) {
           .then((snap) => {
             if (snap.val()) {
               let register_info = snap.val();
-              if (register_info.teamname) {
+              if (register_info.teamname && register_info.member === null) {
+                setTeamname(register_info.teamname);
                 setStep(1);
                 member.push(userBlueprint);
                 setMember(member);
+              } else if (register_info.teamname && register_info.member) {
+                setTeamname(register_info.teamname);
+                setStep(1);
+                setMember(register_info.member);
+                console.log("register_info.teamname && register_info.member")
               }
             }
           });
@@ -72,6 +78,7 @@ export default function Home({ isLoggedIn }) {
       .ref("mic_register/" + uuid)
       .set({
         teamname,
+        member
       });
     setStep(1);
   };
@@ -92,7 +99,7 @@ export default function Home({ isLoggedIn }) {
   };
 
   const handleMemberList = (e) => {
-    console.log(member);
+    e.preventDefault();
     firebase
       .database()
       .ref("mic_register/" + user.uid)
@@ -196,6 +203,7 @@ export default function Home({ isLoggedIn }) {
                       type="text"
                       className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                       placeholder="Your team name"
+                      required
                     />
                   </div>
                   <button
@@ -231,9 +239,11 @@ export default function Home({ isLoggedIn }) {
                     member[i].name = e.target.value;
                     setMember(member);
                   }}
+                  defaultValue={member[i].name}
                   type="text"
                   placeholder="Name"
                   className="border-2 border-gray-200 pl-4 rounded-lg"
+                  required
                 />
               </div>
               <div className="my-2">
@@ -243,14 +253,18 @@ export default function Home({ isLoggedIn }) {
                     member[i].birth = e.target.value;
                     setMember(member);
                   }}
+                  defaultValue={member[i].birth}
                   type="date"
                   className="border-2 border-gray-200 pl-4 rounded-lg"
+                  required
                 />
               </div>
               <div className="my-2">
                 Gender :{" "}
                 <select
                   className="border-2 border-gray-200 pl-4 rounded-lg"
+                  required
+                  defaultValue={"Female"}
                   onChange={(e) => {
                     member[i].gender = e.target.value;
                     setMember(member);
@@ -264,13 +278,15 @@ export default function Home({ isLoggedIn }) {
                 Education :{" "}
                 <select
                   className="border-2 border-gray-200 pl-4 rounded-lg w-36"
+                  required
+                  defaultValue={"Grade_12"}
                   onChange={(e) => {
                     member[i].education = e.target.value;
                     setMember(member);
                   }}>
-                  <option value="Grade 10">Grade 10</option>
-                  <option value="Grade 11">Grade 11</option>
-                  <option value="Grade 12">Grade 12</option>
+                  <option value="Grade_10">Grade 10</option>
+                  <option value="Grade_11">Grade 11</option>
+                  <option value="Grade_12">Grade 12</option>
                 </select>
               </div>
               <div className="my-2">
@@ -280,8 +296,10 @@ export default function Home({ isLoggedIn }) {
                     member[i].university = e.target.value;
                     setMember(member);
                   }}
+                  defaultValue={member[i].university}
                   type="text"
                   className="border-2 border-gray-200 pl-4 rounded-lg"
+                  required
                 />
               </div>
               <div className="my-2">
@@ -291,8 +309,10 @@ export default function Home({ isLoggedIn }) {
                     member[i].faculty = e.target.value;
                     setMember(member);
                   }}
+                  defaultValue={member[i].faculty}
                   type="text"
                   className="border-2 border-gray-200 pl-4 rounded-lg"
+                  required
                 />
               </div>
               <div className="my-2">Address : </div>
@@ -302,8 +322,11 @@ export default function Home({ isLoggedIn }) {
                     member[i].address = e.target.value;
                     setMember(member);
                   }}
+                  defaultValue={member[i].address}
                   rows="3"
-                  className="border-2 border-gray-200 p-4 rounded-lg w-full"></textarea>
+                  className="border-2 border-gray-200 p-4 rounded-lg w-full"
+                  required
+                ></textarea>
               </div>
               <div className="my-2">
                 Tel. :{" "}
@@ -312,8 +335,10 @@ export default function Home({ isLoggedIn }) {
                     member[i].tel = e.target.value;
                     setMember(member);
                   }}
+                  defaultValue={member[i].tel}
                   type="text"
                   className="border-2 border-gray-200 pl-4 rounded-lg"
+                  required
                 />
               </div>
               <div className="my-2">
@@ -323,8 +348,10 @@ export default function Home({ isLoggedIn }) {
                     member[i].email = e.target.value;
                     setMember(member);
                   }}
+                  defaultValue={member[i].email}
                   type="text"
                   className="border-2 border-gray-200 pl-4 rounded-lg"
+                  required
                 />
               </div>
               <div className="my-2">
@@ -334,8 +361,10 @@ export default function Home({ isLoggedIn }) {
                     member[i].facebook = e.target.value;
                     setMember(member);
                   }}
+                  defaultValue={member[i].facebook}
                   type="text"
                   className="border-2 border-gray-200 pl-4 rounded-lg"
+                  required
                 />
               </div>
               <div className="my-2">
@@ -348,8 +377,10 @@ export default function Home({ isLoggedIn }) {
                         member[i].emergency.name = e.target.value;
                         setMember(member);
                       }}
+                      defaultValue={member[i].emergency.name}
                       type="text"
                       className="border-2 border-gray-200 pl-4 rounded-lg"
+                  required
                     />
                   </div>
                   <div className="my-2">
@@ -359,8 +390,10 @@ export default function Home({ isLoggedIn }) {
                         member[i].emergency.tel = e.target.value;
                         setMember(member);
                       }}
+                      defaultValue={member[i].emergency.tel}
                       type="text"
                       className="border-2 border-gray-200 pl-4 rounded-lg"
+                      required
                     />
                   </div>
                 </div>
@@ -395,18 +428,33 @@ export default function Home({ isLoggedIn }) {
                   />{" "}
                   member{teamMemberCounter <= 1 ? "" : "s"}
                 </div>
-                {memberForm}
-              </div>
-              <div className="text-center">
-                <button
-                  className="px-8 py-2 bg-blue-unisec text-white rounded-full hover:bg-blue-900"
-                  onClick={handleMemberList}>
-                  Next{" "}
-                  <FontAwesomeIcon
-                    icon={["fas", "chevron-right"]}
-                    className="w-5"
-                  />
-                </button>
+                <form onSubmit={handleMemberList}>
+                  {memberForm}
+                  <div className="text-center">
+                    <button
+                      type="button"
+                      onClick={() => setStep(0)}
+                      className="px-8 py-2 bg-blue-unisec text-white rounded-full hover:bg-blue-900 mx-2">
+                      <FontAwesomeIcon
+                        icon={["fas", "chevron-left"]}
+                        className="w-5"
+                      />{" "}
+                      Previous
+                    </button>
+                    <button
+                      type="submit"
+                      className="px-8 py-2 bg-blue-unisec text-white rounded-full hover:bg-blue-900 mx-2">
+                      Next{" "}
+                      <FontAwesomeIcon
+                        icon={["fas", "chevron-right"]}
+                        className="w-5"
+                      />
+                    </button>
+                  </div>
+                </form>
+                <div>
+                  <button onClick={() => console.log((member[0].gender == "Female") ? true : false)}>dasd</button>
+                </div>
               </div>
             </div>
           </div>
