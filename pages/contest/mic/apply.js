@@ -64,6 +64,9 @@ export default function Home({ isLoggedIn }) {
               console.log("register_info", register_info);
               if (register_info.submit) {
                 setTeamname(register_info.teamname);
+                setMember(register_info.member);
+                setTeamMemberCounter(register_info.member.length);
+                setFilename(register_info.files);
                 if (isGoToStep) setStep(4);
               } else if (
                 register_info.teamname &&
@@ -144,25 +147,29 @@ export default function Home({ isLoggedIn }) {
   const handleAbstractSubmission = (e) => {
     e.preventDefault();
     console.log(abstractFile);
-    firebase
-      .storage()
-      .ref("mic_register/" + user.uid + "/Abstract_" + teamname)
-      .put(abstractFile);
-    firebase
-      .storage()
-      .ref("mic_register/" + user.uid + "/VideoPresentation_" + teamname)
-      .put(presentationVideo);
+    if (abstractFile != null && presentationVideo != null) {
+      firebase
+        .storage()
+        .ref("mic_register/" + user.uid + "/Abstract_" + teamname)
+        .put(abstractFile);
+      firebase
+        .storage()
+        .ref("mic_register/" + user.uid + "/VideoPresentation_" + teamname)
+        .put(presentationVideo);
 
-    firebase
-      .database()
-      .ref("mic_register/" + user.uid + "/files/abstract_path")
-      .set(abstractFile.name);
-    firebase
-      .database()
-      .ref("mic_register/" + user.uid + "/files/videopresentation_path")
-      .set(presentationVideo.name);
-    setStep(3);
-    console.log("Abstract Submission !");
+      firebase
+        .database()
+        .ref("mic_register/" + user.uid + "/files/abstract_path")
+        .set(abstractFile.name);
+      firebase
+        .database()
+        .ref("mic_register/" + user.uid + "/files/videopresentation_path")
+        .set(presentationVideo.name);
+      setStep(3);
+      console.log("Abstract Submission !");
+    } else {
+      setStep(3);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -561,7 +568,7 @@ export default function Home({ isLoggedIn }) {
                     <div className="text-sm inline">
                       <input
                         onChange={(e) => setAbstractFile(e.target.files[0])}
-                        required
+                        required={filename?.abstract_path == ""}
                         type="file"
                         accept=".pdf"
                         className="bg-white py-2 px-6 border-2 border-gray-300 rounded-full"
@@ -577,7 +584,7 @@ export default function Home({ isLoggedIn }) {
                         onChange={(e) =>
                           setPresentationVideo(e.target.files[0])
                         }
-                        required
+                        required={filename?.videopresentation_path == ""}
                         type="file"
                         accept="video/*"
                         placeholder="Fill URL for your video presentation"
