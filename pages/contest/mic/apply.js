@@ -60,7 +60,7 @@ export default function Home({ isLoggedIn }) {
                 setTeamname(register_info.teamname);
                 setStep(1);
                 setMember(register_info.member);
-                console.log("register_info.teamname && register_info.member")
+                console.log("register_info.teamname && register_info.member");
               }
             }
           });
@@ -78,7 +78,7 @@ export default function Home({ isLoggedIn }) {
       .ref("mic_register/" + uuid)
       .set({
         teamname,
-        member
+        member,
       });
     setStep(1);
   };
@@ -239,7 +239,7 @@ export default function Home({ isLoggedIn }) {
                     member[i].name = e.target.value;
                     setMember(member);
                   }}
-                  defaultValue={member[i].name}
+                  defaultValue={member[i]?.name}
                   type="text"
                   placeholder="Name"
                   className="border-2 border-gray-200 pl-4 rounded-lg"
@@ -253,25 +253,35 @@ export default function Home({ isLoggedIn }) {
                     member[i].birth = e.target.value;
                     setMember(member);
                   }}
-                  defaultValue={member[i].birth}
+                  defaultValue={member[i]?.birth}
                   type="date"
                   className="border-2 border-gray-200 pl-4 rounded-lg"
                   required
                 />
               </div>
               <div className="my-2">
-                Gender :{" "}
+                Gender : {console.log("member[i]?.gender", member[i]?.gender)}
                 <select
                   className="border-2 border-gray-200 pl-4 rounded-lg"
                   required
-                  defaultValue={"Female"}
+                  defaultValue={member[i]?.gender}
                   onChange={(e) => {
                     member[i].gender = e.target.value;
                     setMember(member);
                   }}>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="LGBTQ+">LGBTQ+</option>
+                  <option selected={member[i]?.gender === "Male"} value="Male">
+                    Male
+                  </option>
+                  <option
+                    selected={member[i]?.gender === "Female"}
+                    value="Female">
+                    Female
+                  </option>
+                  <option
+                    selected={member[i]?.gender === "LGBTQ+"}
+                    value="LGBTQ+">
+                    LGBTQ+
+                  </option>
                 </select>
               </div>
               <div className="my-2">
@@ -279,14 +289,26 @@ export default function Home({ isLoggedIn }) {
                 <select
                   className="border-2 border-gray-200 pl-4 rounded-lg w-36"
                   required
-                  defaultValue={"Grade_12"}
+                  defaultValue={member[i]?.education}
                   onChange={(e) => {
                     member[i].education = e.target.value;
                     setMember(member);
                   }}>
-                  <option value="Grade_10">Grade 10</option>
-                  <option value="Grade_11">Grade 11</option>
-                  <option value="Grade_12">Grade 12</option>
+                  <option
+                    selected={member[i]?.education === "Grade_10"}
+                    value="Grade_10">
+                    Grade 10
+                  </option>
+                  <option
+                    selected={member[i]?.education === "Grade_11"}
+                    value="Grade_11">
+                    Grade 11
+                  </option>
+                  <option
+                    selected={member[i]?.education === "Grade_12"}
+                    value="Grade_12">
+                    Grade 12
+                  </option>
                 </select>
               </div>
               <div className="my-2">
@@ -296,7 +318,7 @@ export default function Home({ isLoggedIn }) {
                     member[i].university = e.target.value;
                     setMember(member);
                   }}
-                  defaultValue={member[i].university}
+                  defaultValue={member[i]?.university}
                   type="text"
                   className="border-2 border-gray-200 pl-4 rounded-lg"
                   required
@@ -309,7 +331,7 @@ export default function Home({ isLoggedIn }) {
                     member[i].faculty = e.target.value;
                     setMember(member);
                   }}
-                  defaultValue={member[i].faculty}
+                  defaultValue={member[i]?.faculty}
                   type="text"
                   className="border-2 border-gray-200 pl-4 rounded-lg"
                   required
@@ -322,11 +344,10 @@ export default function Home({ isLoggedIn }) {
                     member[i].address = e.target.value;
                     setMember(member);
                   }}
-                  defaultValue={member[i].address}
+                  defaultValue={member[i]?.address}
                   rows="3"
                   className="border-2 border-gray-200 p-4 rounded-lg w-full"
-                  required
-                ></textarea>
+                  required></textarea>
               </div>
               <div className="my-2">
                 Tel. :{" "}
@@ -335,7 +356,7 @@ export default function Home({ isLoggedIn }) {
                     member[i].tel = e.target.value;
                     setMember(member);
                   }}
-                  defaultValue={member[i].tel}
+                  defaultValue={member[i]?.tel}
                   type="text"
                   className="border-2 border-gray-200 pl-4 rounded-lg"
                   required
@@ -348,7 +369,7 @@ export default function Home({ isLoggedIn }) {
                     member[i].email = e.target.value;
                     setMember(member);
                   }}
-                  defaultValue={member[i].email}
+                  defaultValue={member[i]?.email}
                   type="text"
                   className="border-2 border-gray-200 pl-4 rounded-lg"
                   required
@@ -361,7 +382,7 @@ export default function Home({ isLoggedIn }) {
                     member[i].facebook = e.target.value;
                     setMember(member);
                   }}
-                  defaultValue={member[i].facebook}
+                  defaultValue={member[i]?.facebook}
                   type="text"
                   className="border-2 border-gray-200 pl-4 rounded-lg"
                   required
@@ -377,10 +398,10 @@ export default function Home({ isLoggedIn }) {
                         member[i].emergency.name = e.target.value;
                         setMember(member);
                       }}
-                      defaultValue={member[i].emergency.name}
+                      defaultValue={member[i]?.emergency.name}
                       type="text"
                       className="border-2 border-gray-200 pl-4 rounded-lg"
-                  required
+                      required
                     />
                   </div>
                   <div className="my-2">
@@ -390,7 +411,7 @@ export default function Home({ isLoggedIn }) {
                         member[i].emergency.tel = e.target.value;
                         setMember(member);
                       }}
-                      defaultValue={member[i].emergency.tel}
+                      defaultValue={member[i]?.emergency.tel}
                       type="text"
                       className="border-2 border-gray-200 pl-4 rounded-lg"
                       required
@@ -453,7 +474,12 @@ export default function Home({ isLoggedIn }) {
                   </div>
                 </form>
                 <div>
-                  <button onClick={() => console.log((member[0].gender == "Female") ? true : false)}>dasd</button>
+                  <button
+                    onClick={() =>
+                      console.log(member[0].gender == "Female" ? true : false)
+                    }>
+                    dasd
+                  </button>
                 </div>
               </div>
             </div>
