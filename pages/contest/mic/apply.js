@@ -242,7 +242,7 @@ export default function Home({ isLoggedIn }) {
           <Nav />
           <div className="container mx-auto mt-5 pt-40 pb-20">
             <div>
-              <img src="/progressbar.svg" className="w-100 mx-auto" alt="" />
+              <img src="/progressbar1.svg" className="w-100 mx-auto" alt="" />
             </div>
             <div className="my-10">
               <h2 className="font-bold text-2xl">Step 1 : Team Name</h2>
@@ -492,7 +492,7 @@ export default function Home({ isLoggedIn }) {
           <Nav />
           <div className="container mx-auto mt-5 pt-40 pb-20">
             <div>
-              <img src="/progressbar.svg" className="w-100 mx-auto" alt="" />
+              <img src="/progressbar2.svg" className="w-100 mx-auto" alt="" />
             </div>
             <div className="my-10">
               <h2 className="font-bold text-2xl">Step 2 : Members</h2>
@@ -548,7 +548,7 @@ export default function Home({ isLoggedIn }) {
           <Nav />
           <div className="container mx-auto mt-5 pt-40 pb-20">
             <div>
-              <img src="/progressbar.svg" className="w-100 mx-auto" alt="" />
+              <img src="/progressbar3.svg" className="w-100 mx-auto" alt="" />
             </div>
             <div className="my-10">
               <h2 className="font-bold text-2xl">
@@ -627,7 +627,7 @@ export default function Home({ isLoggedIn }) {
           <Nav />
           <div className="container mx-auto mt-5 pt-40 pb-20">
             <div>
-              <img src="/progressbar.svg" className="w-100 mx-auto" alt="" />
+              <img src="/progressbar4.svg" className="w-100 mx-auto" alt="" />
             </div>
             <div className="my-10">
               <h2 className="font-bold text-2xl">
@@ -762,7 +762,7 @@ export default function Home({ isLoggedIn }) {
           <Nav />
           <div className="container mx-auto mt-5 pt-40 pb-20">
             <div>
-              <img src="/progressbar.svg" className="w-100 mx-auto" alt="" />
+              <img src="/progressbar5.svg" className="w-100 mx-auto" alt="" />
             </div>
             <div className="my-20 text-center">
               <h1 className="font-bold text-2xl">
