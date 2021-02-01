@@ -145,7 +145,7 @@ export default function Home() {
           </div>
           <div className="block lg:hidden text-center px-10 mb-10">
             <h1 className="font-bold text-3xl w-full mb-4">Join Our Discord !</h1>
-            <h2 classNAme="font-medium text-lg">Find your teammate and join The 7<sup>th</sup> Mission Idea Contest together.</h2>
+            <h2 className="font-medium text-lg">Find your teammate and join The 7<sup>th</sup> Mission Idea Contest together.</h2>
           </div>
           <div className="flex flex-col justify-center items-center">
             <img src="/discord_unisec.png" alt=""/>

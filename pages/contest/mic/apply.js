@@ -422,19 +422,24 @@ export default function Home({ isLoggedIn }) {
                     -- select an education --{" "}
                   </option>
                   <option
-                    selected={member[i]?.education === "Grade_10"}
-                    value="Grade_10">
-                    Grade 10
+                    selected={member[i]?.education === "Grade_7-12"}
+                    value="Grade_7-12">
+                    Grade 7-12
                   </option>
                   <option
-                    selected={member[i]?.education === "Grade_11"}
-                    value="Grade_11">
-                    Grade 11
+                    selected={member[i]?.education === "B.A. (Bachelor of Arts)"}
+                    value="B.A. (Bachelor of Arts)">
+                    B.A. (Bachelor of Arts)
                   </option>
                   <option
-                    selected={member[i]?.education === "Grade_12"}
-                    value="Grade_12">
-                    Grade 12
+                    selected={member[i]?.education === "M.A. (Master of Arts)"}
+                    value="M.A. (Master of Arts)">
+                    M.A. (Master of Arts)
+                  </option>
+                  <option
+                    selected={member[i]?.education === "Ph.D. (Doctor of Philosophy)"}
+                    value="Ph.D. (Doctor of Philosophy)">
+                    Ph.D. (Doctor of Philosophy)
                   </option>
                 </select>
               </div>
