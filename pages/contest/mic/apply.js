@@ -111,38 +111,40 @@ export default function Home({ isLoggedIn }) {
 
   useEffect(() => {
     if (step == 3) {
-      firebase
-        .storage()
-        .ref(
-          "mic_register/" +
-            user.uid +
-            "/Abstract_" +
-            teamname +
-            "." +
-            filename.abstract_path.split(".")[
-              filename.abstract_path.split(".").length - 1
-            ]
-        )
-        .getDownloadURL()
-        .then((url) => {
-          setAbstractURL(url);
-        });
-      firebase
-        .storage()
-        .ref(
-          "mic_register/" +
-            user.uid +
-            "/VideoPresentation_" +
-            teamname +
-            "." +
-            filename.videopresentation_path.split(".")[
-              filename.videopresentation_path.split(".").length - 1
-            ]
-        )
-        .getDownloadURL()
-        .then((url) => {
-          setVideoURL(url);
-        });
+      if (filename.abstract_path && filename.videopresentation_path) {
+        firebase
+          .storage()
+          .ref(
+            "mic_register/" +
+              user.uid +
+              "/Abstract_" +
+              teamname +
+              "." +
+              filename.abstract_path.split(".")[
+                filename.abstract_path.split(".").length - 1
+              ]
+          )
+          .getDownloadURL()
+          .then((url) => {
+            setAbstractURL(url);
+          });
+        firebase
+          .storage()
+          .ref(
+            "mic_register/" +
+              user.uid +
+              "/VideoPresentation_" +
+              teamname +
+              "." +
+              filename.videopresentation_path.split(".")[
+                filename.videopresentation_path.split(".").length - 1
+              ]
+          )
+          .getDownloadURL()
+          .then((url) => {
+            setVideoURL(url);
+          });
+      }
     }
   }, [step]);
 
@@ -427,7 +429,9 @@ export default function Home({ isLoggedIn }) {
                     Grade 7-12
                   </option>
                   <option
-                    selected={member[i]?.education === "B.A. (Bachelor of Arts)"}
+                    selected={
+                      member[i]?.education === "B.A. (Bachelor of Arts)"
+                    }
                     value="B.A. (Bachelor of Arts)">
                     B.A. (Bachelor of Arts)
                   </option>
@@ -437,7 +441,9 @@ export default function Home({ isLoggedIn }) {
                     M.A. (Master of Arts)
                   </option>
                   <option
-                    selected={member[i]?.education === "Ph.D. (Doctor of Philosophy)"}
+                    selected={
+                      member[i]?.education === "Ph.D. (Doctor of Philosophy)"
+                    }
                     value="Ph.D. (Doctor of Philosophy)">
                     Ph.D. (Doctor of Philosophy)
                   </option>
