@@ -31,6 +31,7 @@ export default function Home({ isLoggedIn }) {
   const [filename, setFilename] = useState([""]);
   const [abstractURL, setAbstractURL] = useState(null);
   const [videoURL, setVideoURL] = useState(null);
+  const [loading, setLoading] = useState(false);
   const suffix = ["st", "nd", "rd", "th"];
   const userBlueprint = {
     name: null,
@@ -189,43 +190,47 @@ export default function Home({ isLoggedIn }) {
     e.preventDefault();
     console.log(abstractFile);
     if (abstractFile != null && presentationVideo != null) {
-      firebase
-        .storage()
-        .ref(
-          "mic_register/" +
-            user.uid +
-            "/Abstract_" +
-            teamname +
-            "." +
-            abstractFile.name.split(".")[
-              abstractFile.name.split(".").length - 1
-            ]
-        )
-        .put(abstractFile);
-      firebase
-        .storage()
-        .ref(
-          "mic_register/" +
-            user.uid +
-            "/VideoPresentation_" +
-            teamname +
-            "." +
-            presentationVideo.name.split(".")[
-              presentationVideo.name.split(".").length - 1
-            ]
-        )
-        .put(presentationVideo);
-
-      firebase
-        .database()
-        .ref("mic_register/" + user.uid + "/files/abstract_path")
-        .set(abstractFile.name);
-      firebase
-        .database()
-        .ref("mic_register/" + user.uid + "/files/videopresentation_path")
-        .set(presentationVideo.name);
-      setStep(3);
-      console.log("Abstract Submission !");
+      setLoading(true);
+      Promise.all([
+        firebase
+          .storage()
+          .ref(
+            "mic_register/" +
+              user.uid +
+              "/Abstract_" +
+              teamname +
+              "." +
+              abstractFile.name.split(".")[
+                abstractFile.name.split(".").length - 1
+              ]
+          )
+          .put(abstractFile),
+        firebase
+          .storage()
+          .ref(
+            "mic_register/" +
+              user.uid +
+              "/VideoPresentation_" +
+              teamname +
+              "." +
+              presentationVideo.name.split(".")[
+                presentationVideo.name.split(".").length - 1
+              ]
+          )
+          .put(presentationVideo),
+      ]).then(() => {
+        setLoading(false);
+        firebase
+          .database()
+          .ref("mic_register/" + user.uid + "/files/abstract_path")
+          .set(abstractFile.name);
+        firebase
+          .database()
+          .ref("mic_register/" + user.uid + "/files/videopresentation_path")
+          .set(presentationVideo.name);
+        setStep(3);
+        console.log("Abstract Submission !");
+      });
     } else {
       setStep(3);
     }
@@ -240,7 +245,18 @@ export default function Home({ isLoggedIn }) {
     setStep(4);
   };
 
-  if (user === null) {
+  if (loading) {
+    return (
+      <div className="h-screen flex flex-col justify-center items-center">
+        <div className="lds-ring w-16 h-16">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    );
+  } else if (user === null) {
     return (
       <div className="h-screen flex flex-col justify-center items-center">
         <div className="lds-ring w-16 h-16">
