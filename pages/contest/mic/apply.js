@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Nav from "../../_components/Nav";
+import Nav from "../../_components/NavMIC";
 import { useEffect, useState } from "react";
 
 import firebase from "firebase/app";
@@ -13,14 +13,14 @@ startFirebase();
 import { googleSigin } from "../../../src/services/siginProvider";
 
 const Footer = (props) => (
-  <div className="w-full bottom-0 bg-blue-unisec text-white">
+  <div className="absolute w-full bottom-0 bg-blue-unisec text-white">
     <div className="container mx-auto px-20 py-10">
       CopyRight © UNISEC Thailand, All Rights Reserved.
     </div>
   </div>
 );
 
-export default function Home({ isLoggedIn }) {
+export default function Home() {
   const [teamname, setTeamname] = useState("");
   const [user, setUser] = useState(null);
   const [teamMemberCounter, setTeamMemberCounter] = useState(1);
@@ -55,7 +55,17 @@ export default function Home({ isLoggedIn }) {
         setUser({
           uid: user.uid,
           name: user.displayName,
+          email: user.email
         });
+
+        firebase.database().ref("users/" + user.uid).once("value").then(snap => {
+          if (!snap.val()) {
+            firebase.database().ref("users/" + user.uid).set({
+              name: user.displayName,
+              email: user.email
+            })
+          }
+        })
 
         firebase
           .database()
@@ -64,7 +74,7 @@ export default function Home({ isLoggedIn }) {
           .then((snap) => {
             if (snap.val()) {
               let register_info = snap.val();
-              console.log("register_info", register_info);
+              // console.log("register_info", register_info);
               if (register_info.submit) {
                 setTeamname(register_info.teamname);
                 setMember(register_info.member);
@@ -188,7 +198,7 @@ export default function Home({ isLoggedIn }) {
 
   const handleAbstractSubmission = (e) => {
     e.preventDefault();
-    console.log(abstractFile);
+    // console.log(abstractFile);
     if (abstractFile != null && presentationVideo != null) {
       setLoading(true);
       Promise.all([
@@ -229,7 +239,7 @@ export default function Home({ isLoggedIn }) {
           .ref("mic_register/" + user.uid + "/files/videopresentation_path")
           .set(presentationVideo.name);
         setStep(3);
-        console.log("Abstract Submission !");
+        // console.log("Abstract Submission !");
       });
     } else {
       setStep(3);
@@ -244,6 +254,14 @@ export default function Home({ isLoggedIn }) {
       .set(true);
     setStep(4);
   };
+
+  const logout = () => {
+    firebase.auth().signOut().then(function() {
+          console.log("Logged Out!")
+        }).catch(function(error) {
+          console.log(error)
+        });
+  }
 
   if (loading) {
     return (
@@ -269,14 +287,14 @@ export default function Home({ isLoggedIn }) {
     );
   } else if (user.length == 0) {
     return (
-      <div className="h-screen">
+      <div className="min-h-screen relative">
         <Head>
           <title>Mission Idea Contest Application | UNISEC Thailand</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Nav />
+        <Nav user={user} logout={logout} />
         <div>
-          <div className="container mx-auto mt-5 pt-40 pb-10">
+          <div className="container mx-auto mt-5 p-16">
             <h1 className="text-4xl font-bold text-center mx-10 md:mx-0">
               Applicant Login
             </h1>
@@ -310,24 +328,19 @@ export default function Home({ isLoggedIn }) {
             </div>
           </div>
         </div>
-
-        <div className="w-full bottom-0 fixed bg-blue-unisec text-white">
-          <div className="container mx-auto px-20 py-10">
-            CopyRight © UNISEC Thailand, All Rights Reserved.
-          </div>
-        </div>
+        <Footer />
       </div>
     );
   } else if (user.name !== null) {
     if (step == 0) {
       return (
-        <div className="h-screen">
+        <div className="min-h-screen relative">
           <Head>
             <title>Mission Idea Contest Application | UNISEC Thailand</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
-          <Nav />
-          <div className="container mx-auto mt-5 pt-40 pb-20">
+          <Nav user={user} logout={logout} />
+          <div className="container mx-auto mt-5 pb-40 px-10 md:p-20 md:pt-10">
             <div>
               <img src="/progressbar1.svg" className="w-100 mx-auto" alt="" />
             </div>
@@ -335,20 +348,20 @@ export default function Home({ isLoggedIn }) {
               <h2 className="font-bold text-2xl">Step 1 : Team Name</h2>
               <div className="py-40 flex flex-col items-center">
                 <form
-                  className="flex w-full max-w-sm space-x-3"
+                  className="flex w-full items-center justify-center"
                   onSubmit={handleSubmmitedNamedFormed}>
-                  <div className=" relative ">
+                  <div className=" relative mr-2">
                     <input
                       onChange={(e) => setTeamname(e.target.value)}
                       value={teamname}
                       type="text"
-                      className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                      className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                       placeholder="Your team name"
                       required
                     />
                   </div>
                   <button
-                    className="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
+                    className="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-blue-unisec rounded-lg shadow-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200"
                     type="submit">
                     <FontAwesomeIcon icon={["fas", "check"]} className="w-5" />
                   </button>
@@ -397,7 +410,7 @@ export default function Home({ isLoggedIn }) {
                 />
               </div>
               <div className="my-2">
-                Gender : {console.log("member[i]?.gender", member[i]?.gender)}
+                Gender : {/* console.log("member[i]?.gender", member[i]?.gender) */}
                 <select
                   className="border-2 border-gray-200 pl-4 rounded-lg"
                   required
@@ -524,7 +537,7 @@ export default function Home({ isLoggedIn }) {
                     setMember(member);
                   }}
                   defaultValue={member[i]?.email}
-                  type="text"
+                  type="email"
                   className="border-2 border-gray-200 pl-4 rounded-lg"
                   required
                 />
@@ -579,19 +592,19 @@ export default function Home({ isLoggedIn }) {
       }
 
       return (
-        <div className="h-screen">
+        <div className="min-h-screen relative">
           <Head>
             <title>Mission Idea Contest Application | UNISEC Thailand</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
-          <Nav />
-          <div className="container mx-auto mt-5 pt-40 pb-20">
+          <Nav user={user} logout={logout} />
+          <div className="container mx-auto mt-5 pb-40 px-10 md:p-20 md:pt-10">
             <div>
               <img src="/progressbar2.svg" className="w-100 mx-auto" alt="" />
             </div>
             <div className="my-10">
               <h2 className="font-bold text-2xl">Step 2 : Members</h2>
-              <div className="p-10">
+              <div className="py-10 md:p-10">
                 <div>
                   Team people{" "}
                   <input
@@ -605,7 +618,7 @@ export default function Home({ isLoggedIn }) {
                 </div>
                 <form onSubmit={handleMemberList}>
                   {memberForm}
-                  <div className="text-center">
+                  <div className="text-center mt-10">
                     <button
                       type="button"
                       onClick={() => setStep(0)}
@@ -635,13 +648,13 @@ export default function Home({ isLoggedIn }) {
       );
     } else if (step == 2) {
       return (
-        <div className="min-h-screen">
+        <div className="min-h-screen relative">
           <Head>
             <title>Mission Idea Contest Application | UNISEC Thailand</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
-          <Nav />
-          <div className="container mx-auto mt-5 pt-40 pb-20">
+          <Nav user={user} logout={logout} />
+          <div className="container mx-auto mt-5 pb-40 px-10 md:p-20 md:pt-10">
             <div>
               <img src="/progressbar3.svg" className="w-100 mx-auto" alt="" />
             </div>
@@ -659,7 +672,7 @@ export default function Home({ isLoggedIn }) {
                         required={filename?.abstract_path == ""}
                         type="file"
                         accept=".pdf"
-                        className="bg-white py-2 px-6 border-2 border-gray-300 rounded-full"
+                        className="bg-white py-2 px-6 border-2 border-gray-300 rounded-full w-full md:w-max"
                       />
                     </div>
                   </div>
@@ -676,12 +689,8 @@ export default function Home({ isLoggedIn }) {
                         type="file"
                         accept="video/*"
                         placeholder="Fill URL for your video presentation"
-                        className="bg-white py-2 px-6 border-2 border-gray-300 rounded-full w-96"
+                        className="bg-white py-2 px-6 border-2 border-gray-300 rounded-full w-full md:w-max"
                       />
-                    </div>
-                    <div className="text-gray-400 text-sm mt-2">
-                      * Upload your video on youtube or google drive and put
-                      your URL here.
                     </div>
                   </div>
                   <div className="text-center mt-16">
@@ -714,13 +723,13 @@ export default function Home({ isLoggedIn }) {
       );
     } else if (step == 3) {
       return (
-        <div className="min-h-screen">
+        <div className="min-h-screen relative">
           <Head>
             <title>Mission Idea Contest Application | UNISEC Thailand</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
-          <Nav />
-          <div className="container mx-auto mt-5 pt-40 pb-20">
+          <Nav user={user} logout={logout} />
+          <div className="container mx-auto mt-5 pb-40 px-10 md:p-20 md:pt-10">
             <div>
               <img src="/progressbar4.svg" className="w-100 mx-auto" alt="" />
             </div>
@@ -728,7 +737,7 @@ export default function Home({ isLoggedIn }) {
               <h2 className="font-bold text-2xl">
                 Step 4 : Summary Information
               </h2>
-              <div className="py-10 pl-10 text-left">
+              <div className="py-10 lg:pl-10 text-left">
                 <div>
                   <div>
                     <h2 className="font-semibold inline">Team Name : </h2>
@@ -813,7 +822,7 @@ export default function Home({ isLoggedIn }) {
                       <div>
                         <span className="font-semibold">Abstract Document</span>{" "}
                         :{" "}
-                        <a href={abstractURL} class="text-blue-700">
+                        <a href={abstractURL} target="_blank" className="text-blue-700">
                           {filename.abstract_path}
                         </a>
                       </div>
@@ -822,7 +831,7 @@ export default function Home({ isLoggedIn }) {
                           Video Presentation
                         </span>{" "}
                         :{" "}
-                        <a href={videoURL} class="text-blue-700">
+                        <a href={videoURL} target="_blank" className="text-blue-700">
                           {filename.videopresentation_path}
                         </a>
                       </div>
@@ -855,13 +864,13 @@ export default function Home({ isLoggedIn }) {
       );
     } else if (step == 4) {
       return (
-        <div className="h-screen">
+        <div className="min-h-screen relative">
           <Head>
             <title>Mission Idea Contest Application | UNISEC Thailand</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
-          <Nav />
-          <div className="container mx-auto mt-5 pt-40 pb-20">
+          <Nav user={user} logout={logout} />
+          <div className="container mx-auto mt-5 pb-40 px-10 md:p-20 md:pt-10">
             <div>
               <img src="/progressbar5.svg" className="w-100 mx-auto" alt="" />
             </div>
@@ -869,14 +878,11 @@ export default function Home({ isLoggedIn }) {
               <h1 className="font-bold text-2xl">
                 Thanks for submitted your project !
               </h1>
-              <h2 className="font-bold text-xl mt-4">Good Luck !</h2>
+              <h2 className="font-bold text-xl mt-4">Join our <img src="/discord_logo.svg" className="w-10 inline" alt=""/> Discord !</h2>
+              <div className="flex flex-col items-center justify-center mt-4"><img src="/discord_unisec.png" className="shadow-lg" alt=""/></div>
             </div>
           </div>
-          <div className="absolute bottom-0 w-full bg-blue-unisec text-white">
-            <div className="container mx-auto px-20 py-10">
-              CopyRight © UNISEC Thailand, All Rights Reserved.
-            </div>
-          </div>
+          <Footer />
         </div>
       );
     }
