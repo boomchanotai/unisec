@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        'header-mobile' : '70% 30%'
+        'header-mobile' : '70% 30%',
+        'split-20-80' : '20% 80%'
       }
     },
   },
