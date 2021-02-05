@@ -61,54 +61,75 @@ export default function Home() {
             <div className="max-w-3xl mx-auto">
               <div className="grid grid-cols-2 pt-10">
                 <div data-aos="fade-right">Feb 2, 2021</div>
-                <div data-aos="fade-left">Open Registration</div>
+                <div data-aos="fade-left" className="text-green-500">
+                  Open Registration
+                </div>
               </div>
               <div className="grid grid-cols-2 pt-10">
                 <div data-aos="fade-right">Mar 14, 2021</div>
-                <div data-aos="fade-left">Close Registration and Abstract Submission</div>
+                <div data-aos="fade-left" className="text-red-500">
+                  Close Registration and Abstract Submission
+                </div>
               </div>
               <div className="grid grid-cols-2 pt-10">
                 <div data-aos="fade-right">Mar 28, 2021</div>
-                <div data-aos="fade-left">Semi-Finalist Announcement 14 Teams</div>
+                <div data-aos="fade-left" className="text-green-500">
+                  Semi-Finalist Announcement 14 Teams
+                </div>
               </div>
               <div className="grid grid-cols-2 pt-10">
                 <div data-aos="fade-right">Apr 25, 2021</div>
-                <div data-aos="fade-left">
+                <div data-aos="fade-left" className="text-red-500">
                   Semi-Final Submission
                 </div>
               </div>
               <div className="grid grid-cols-2 pt-10">
                 <div data-aos="fade-right">May 9, 2021</div>
-                <div data-aos="fade-left">Finalist Announcement 5 Teams</div>
+                <div data-aos="fade-left" className="text-green-500">
+                  Finalist Announcement 5 Teams
+                </div>
               </div>
               <div className="grid grid-cols-2 pt-10">
                 <div data-aos="fade-right">Jun 9, 2021</div>
-                <div data-aos="fade-left">Final Submission</div>
+                <div data-aos="fade-left" className="text-red-500">
+                  Final Submission
+                </div>
               </div>
               <div className="grid grid-cols-2 pt-10">
                 <div data-aos="fade-right">Jun 28, 2021</div>
-                <div data-aos="fade-left">Final Presentation @NARIT, Chiang Mai</div>
+                <div data-aos="fade-left" className="text-green-500">
+                  Final Presentation @NARIT, Chiang Mai
+                </div>
               </div>
             </div>
           </div>
           <div className="my-10 mx-10 md:mx-40">
             <h2 className="text-xl font-medium">Requirements</h2>
             <div className="max-w-3xl mx-auto text-black">
-              <a href="http://www.spacemic.net/pdf/mic7/MIC7_constraints.pdf" target="_blank" className="bg-white my-5 flex flex-row items-center px-6 py-1 rounded-full hover:bg-gray-200 cursor-pointer">
+              <a
+                href="http://www.spacemic.net/pdf/mic7/MIC7_constraints.pdf"
+                target="_blank"
+                className="bg-white my-5 flex flex-row items-center px-6 py-1 rounded-full hover:bg-gray-200 cursor-pointer">
                 <FontAwesomeIcon
                   icon={["fas", "file-pdf"]}
                   className="w-5 m-2"
                 />{" "}
                 <span className="pl-5">Constraints</span>
               </a>
-              <a href="http://www.spacemic.net/pdf/mic7/MIC7_abstract_template.pdf" target="_blank" className="bg-white my-5 flex flex-row items-center px-6 py-1 rounded-full hover:bg-gray-200 cursor-pointer">
+              <a
+                href="http://www.spacemic.net/pdf/mic7/MIC7_abstract_template.pdf"
+                target="_blank"
+                className="bg-white my-5 flex flex-row items-center px-6 py-1 rounded-full hover:bg-gray-200 cursor-pointer">
                 <FontAwesomeIcon
                   icon={["fas", "file-pdf"]}
                   className="w-5 m-2"
                 />{" "}
                 <span className="pl-5">Abstract template</span>
               </a>
-              <a href="http://www.spacemic.net/pdf/mic7/MIC7_abstract_template.doc" download className="bg-white my-5 flex flex-row items-center px-6 py-1 rounded-full hover:bg-gray-200 cursor-pointer">
+              <a
+                href="http://www.spacemic.net/pdf/mic7/MIC7_abstract_template.doc"
+                download
+                className="bg-white my-5 flex flex-row items-center px-6 py-1 rounded-full hover:bg-gray-200 cursor-pointer">
                 <FontAwesomeIcon
                   icon={["fas", "file-word"]}
                   className="w-5 m-2"
@@ -140,15 +161,23 @@ export default function Home() {
           <div className="hidden lg:flex flex-col justify-center items-center">
             <div className="text-right">
               <h1 className="font-bold text-3xl w-full">Join Our Discord !</h1>
-              <h2 className="font-medium text-lg">Find your teammate and join The 7<sup>th</sup> Mission Idea Contest together.</h2>
+              <h2 className="font-medium text-lg">
+                Find your teammate and join The 7<sup>th</sup> Mission Idea
+                Contest together.
+              </h2>
             </div>
           </div>
           <div className="block lg:hidden text-center px-10 mb-10">
-            <h1 className="font-bold text-3xl w-full mb-4">Join Our Discord !</h1>
-            <h2 className="font-medium text-lg">Find your teammate and join The 7<sup>th</sup> Mission Idea Contest together.</h2>
+            <h1 className="font-bold text-3xl w-full mb-4">
+              Join Our Discord !
+            </h1>
+            <h2 className="font-medium text-lg">
+              Find your teammate and join The 7<sup>th</sup> Mission Idea
+              Contest together.
+            </h2>
           </div>
           <div className="flex flex-col justify-center items-center">
-            <img src="/discord_unisec.png" alt=""/>
+            <img src="/discord_unisec.png" alt="" />
           </div>
         </div>
       </div>
