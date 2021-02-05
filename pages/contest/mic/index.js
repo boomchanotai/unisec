@@ -61,43 +61,43 @@ export default function Home() {
             <div className="max-w-3xl mx-auto">
               <div className="grid grid-cols-2 pt-10">
                 <div data-aos="fade-right">Feb 2, 2021</div>
-                <div data-aos="fade-left" className="text-green-500">
+                <div data-aos="fade-left" className=" text-lg">
                   Open Registration
                 </div>
               </div>
               <div className="grid grid-cols-2 pt-10">
                 <div data-aos="fade-right">Mar 14, 2021</div>
-                <div data-aos="fade-left" className="text-red-500">
+                <div data-aos="fade-left" className="text-red-500 text-lg">
                   Close Registration and Abstract Submission
                 </div>
               </div>
               <div className="grid grid-cols-2 pt-10">
                 <div data-aos="fade-right">Mar 28, 2021</div>
-                <div data-aos="fade-left" className="text-green-500">
+                <div data-aos="fade-left" className=" text-lg">
                   Semi-Finalist Announcement 14 Teams
                 </div>
               </div>
               <div className="grid grid-cols-2 pt-10">
                 <div data-aos="fade-right">Apr 25, 2021</div>
-                <div data-aos="fade-left" className="text-red-500">
+                <div data-aos="fade-left" className="text-red-500 text-lg">
                   Semi-Final Submission
                 </div>
               </div>
               <div className="grid grid-cols-2 pt-10">
                 <div data-aos="fade-right">May 9, 2021</div>
-                <div data-aos="fade-left" className="text-green-500">
+                <div data-aos="fade-left" className=" text-lg">
                   Finalist Announcement 5 Teams
                 </div>
               </div>
               <div className="grid grid-cols-2 pt-10">
                 <div data-aos="fade-right">Jun 9, 2021</div>
-                <div data-aos="fade-left" className="text-red-500">
+                <div data-aos="fade-left" className="text-red-500 text-lg">
                   Final Submission
                 </div>
               </div>
               <div className="grid grid-cols-2 pt-10">
                 <div data-aos="fade-right">Jun 28, 2021</div>
-                <div data-aos="fade-left" className="text-green-500">
+                <div data-aos="fade-left" className=" text-lg">
                   Final Presentation @NARIT, Chiang Mai
                 </div>
               </div>
