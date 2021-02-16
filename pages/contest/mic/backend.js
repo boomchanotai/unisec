@@ -15,7 +15,7 @@ import { googleSigin } from "../../../src/services/siginProvider";
 
 const Backend = () => {
 
-    const [user, setUser] = useState("")
+    const [user, setUser] = useState(null)
     const [teams, setTeams] = useState(null)
     const [regUser, setRegUser] = useState(null)
 

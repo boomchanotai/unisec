@@ -1,8 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from 'react'
 
-export default function Navbar(){
+export default function Navbar(props){
+
   return(
-    <nav className="absolute w-full grid grid-cols-header-mobile md:grid-cols-2">
+    <nav className={`${props.position == "fixed" ? "fixed" : "absolute"} w-full grid grid-cols-header-mobile md:grid-cols-2 z-40 duration-300`} style={{ backgroundColor : props.coloredBG ? "rgba(31, 38, 56, 0.8)" : "transparent" }}>
       <div className="px-10 lg:px-20 py-5">
         <a href="/">
           <img
@@ -12,19 +14,20 @@ export default function Navbar(){
           />
         </a>
       </div>
-      <div className="px-10 lg:px-20 py-5 hidden justify-end items-center">
-        {/* hidden md:flex */}
-        <ul className="flex justify-end items-center">
-          <a href="#" className="mx-5">
-            <li>Sign up</li>
-          </a>
-          <a
-            href="#"
-            className="mx-5 bg-black text-white border-black border-2 px-10 py-2 rounded-full duration-500 hover:bg-white hover:text-black">
-            <li>Sign in</li>
-          </a>
-        </ul>
-      </div>
+      {props.mic ? (
+        <div className="px-10 lg:px-20 py-5 hidden lg:flex justify-end items-center">
+          <ul className="flex justify-end items-center text-white">
+            <li className="mx-5 cursor-pointer" onClick={props.about}>About</li>
+            <li className="mx-5 cursor-pointer" onClick={props.timeline}>Timeline</li>
+            <li className="mx-5 cursor-pointer" onClick={props.faq}>FAQ</li>
+            <a
+              href="/contest/mic/apply"
+              className="mx-5 bg-white text-black border-white border-2 px-10 py-2 rounded-full duration-500 hover:bg-transparent hover:text-white">
+              <li>Apply Now</li>
+            </a>
+          </ul>
+        </div>
+      ) : null}
       <div className="hidden justify-center items-center">
         {/* flex md:hidden */}
         <FontAwesomeIcon icon={["fas", "bars"]} className="w-5 m-2" />

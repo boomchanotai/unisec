@@ -1,13 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@100;200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Prompt:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 html,
 body {
   padding: 0;
   margin: 0;
   background-color: #FDFFF7;
+  font-family: 'Prompt', sans-serif;
+  scroll-behavior: smooth;
+}
+
+.read-more-button{
+  color: rgba(37, 99, 235, 1);
+  display: inline;
+  position: relative;
+  cursor: pointer;
+}
+
+.read-more-button::before{
+  content: " ... ";
+}
+
+.font-bebas{
+  font-family: 'Bebas Neue', cursive;
+}
+
+.font-prompt{
   font-family: 'Prompt', sans-serif;
 }
 
@@ -23,7 +43,6 @@ a {
 .bg-blue-unisec{
   background-color: #171D4F;
 }
-
 
 /* Loading Ring */
 
@@ -60,5 +79,30 @@ a {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+.thumbnail{
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+.thumbnail:hover{
+  transform: scale(1.5);
+}
+
+.bounce{
+  animation: bounceAnimate 1s infinite;
+}
+
+@keyframes bounceAnimate {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+  100%{
+    transform: translateY(0px);
   }
 }
