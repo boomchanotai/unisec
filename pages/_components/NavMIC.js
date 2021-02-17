@@ -16,7 +16,7 @@ const Navbar = ({ user,logout }) => {
         {(user.uid) ? (
             <ul className="flex justify-end items-center">
                 <div
-                    className="cursor-pointer mx-5 bg-black text-white border-black border-2 px-10 py-2 rounded-full duration-500 hover:bg-white hover:text-black"
+                    className="cursor-pointer mx-5 bg-transparent text-white border-white border-2 px-10 py-2 rounded-full duration-500 hover:bg-white hover:text-black"
                     onClick={logout}
                 >
                     <li>Sign out</li>
@@ -24,16 +24,6 @@ const Navbar = ({ user,logout }) => {
             </ul>
         ) : (
             <div></div>
-            // <ul className="flex justify-end items-center">
-            //     <a href="#" className="mx-5">
-            //         <li>Sign up</li>
-            //     </a>
-            //     <a
-            //         href="#"
-            //         className="mx-5 bg-black text-white border-black border-2 px-10 py-2 rounded-full duration-500 hover:bg-white hover:text-black">
-            //         <li>Sign in</li>
-            //     </a>
-            // </ul>
         )}
       </div>
       <div className="flex md:hidden justify-center items-center">
