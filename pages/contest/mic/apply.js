@@ -652,11 +652,7 @@ export default function Home() {
                 <button
                   type="submit"
                   className="px-8 py-2 bg-blue-unisec text-white rounded-full hover:bg-blue-900 mx-2">
-                  Next{" "}
-                  <FontAwesomeIcon
-                    icon={["fas", "chevron-right"]}
-                    className="w-5"
-                  />
+                  Next{" >"}
                 </button>
               </div>
             </form>
@@ -712,20 +708,12 @@ export default function Home() {
               <button
                 onClick={() => setStep(1)}
                 className="px-8 py-2 bg-blue-unisec text-white rounded-full hover:bg-blue-900 mx-2">
-                <FontAwesomeIcon
-                  icon={["fas", "chevron-left"]}
-                  className="w-5"
-                />{" "}
-                Previous
+                {"< "}Previous
               </button>
               <button
                 onClick={handleCheckSumTeam}
                 className="px-8 py-2 bg-blue-unisec text-white rounded-full hover:bg-blue-900 mx-2">
-                Next{" "}
-                <FontAwesomeIcon
-                  icon={["fas", "chevron-right"]}
-                  className="w-5"
-                />
+                Next{" >"}
               </button>
             </div>
           </div>
@@ -1028,19 +1016,11 @@ export default function Home() {
                   type="button"
                   onClick={() => setStep(2)}
                   className="px-8 py-2 bg-blue-unisec cursor-pointer text-white rounded-full hover:bg-blue-900 mx-2">
-                  <FontAwesomeIcon
-                    icon={["fas", "chevron-left"]}
-                    className="w-5"
-                  />{" "}
-                  Previous
+                  {"< "}Previous
                 </button>
                 <button
                   className="px-8 py-2 bg-blue-unisec cursor-pointer text-white rounded-full hover:bg-blue-900 mx-2">
-                  Next{" "}
-                  <FontAwesomeIcon
-                    icon={["fas", "chevron-right"]}
-                    className="w-5"
-                  />
+                  Next{" >"}
                 </button>
               </div>
             </form>
@@ -1120,56 +1100,55 @@ export default function Home() {
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <Nav user={user} logout={logout} />
-          <div className="container mx-auto mt-5 pb-40 px-10 md:p-20 md:pt-10 md:pb-40 text-white">
-            <h1 className="font-bold text-2xl">Abstract Summary</h1>
-            <div className="md:m-8">
-              <div className="m-4"><span className="font-bold">Title : </span>{abstract.title}</div>
-              <div className="m-4"><span className="font-bold">Primary Point of Contact (POC) &amp; email : </span>{abstract.poc}</div>
-              <div className="m-4"><span className="font-bold">Co-authors : </span>{abstract.co_authors}</div>
-              <div className="m-4"><span className="font-bold">Organization : </span>{abstract.organization}</div>
-              <div className="m-4"><span className="font-bold">Prize : </span>{abstract.prize == "stu_prize" ? "Apply for Student Prize." : "Keep idea confidential if we are not selected as finalist/semi-finalist."}</div>
-              <div className="m-4">
-                <div className="font-bold">Mission Objectives (where and why?)</div>
-                <div className="m-4">{abstract.mission_obj}</div>
-              </div>
-              <div className="m-4">
-                <div className="font-bold">Concept of Operations including orbital design</div>
-                <div className="m-4">{abstract.operation}</div>
-              </div>
-              <div className="m-4">
-                <div className="font-bold">Key Performance Parameters</div>
-                <div className="m-4">{abstract.key_performance}</div>
-              </div>
-              <div className="m-4">
-                <div className="font-bold">Space Segment Description</div>
-                <div className="m-4">{abstract.space_segment}</div>
-              </div>
-              <div className="m-4">
-                <div className="font-bold">Additional considerations</div>
-                <div className="m-4">{abstract.add_considerations}</div>
-              </div>
-              <div className="m-4">
-                <div className="font-bold">References</div>
-                <div className="m-4">{abstract.ref}</div>
-              </div>
-              <div>
-                <span className="font-semibold">
-                  Video Presentation
-                </span>{" "}
-                :{" "}
-                <a href={videoURL} target="_blank" className="text-blue-400">
-                  {filename.videopresentation_path}
-                </a>
+          <div className="container mx-auto mt-5 pb-40">
+            <div className="m-4 bg-white p-8 md:p-16 rounded-lg shadow">
+              <h1 className="font-bold text-2xl">Abstract Summary</h1>
+              <div className="md:m-8">
+                <div className="m-4"><span className="font-bold">Title : </span>{abstract.title}</div>
+                <div className="m-4"><span className="font-bold">Primary Point of Contact (POC) &amp; email : </span>{abstract.poc}</div>
+                <div className="m-4"><span className="font-bold">Co-authors : </span>{abstract.co_authors}</div>
+                <div className="m-4"><span className="font-bold">Organization : </span>{abstract.organization}</div>
+                <div className="m-4"><span className="font-bold">Prize : </span>{abstract.prize == "stu_prize" ? "Apply for Student Prize." : "Keep idea confidential if we are not selected as finalist/semi-finalist."}</div>
+                <div className="m-4">
+                  <div className="font-bold">Mission Objectives (where and why?)</div>
+                  <div className="m-4">{abstract.mission_obj}</div>
+                </div>
+                <div className="m-4">
+                  <div className="font-bold">Concept of Operations including orbital design</div>
+                  <div className="m-4">{abstract.operation}</div>
+                </div>
+                <div className="m-4">
+                  <div className="font-bold">Key Performance Parameters</div>
+                  <div className="m-4">{abstract.key_performance}</div>
+                </div>
+                <div className="m-4">
+                  <div className="font-bold">Space Segment Description</div>
+                  <div className="m-4">{abstract.space_segment}</div>
+                </div>
+                <div className="m-4">
+                  <div className="font-bold">Additional considerations</div>
+                  <div className="m-4">{abstract.add_considerations}</div>
+                </div>
+                <div className="m-4">
+                  <div className="font-bold">References</div>
+                  <div className="m-4">{abstract.ref}</div>
+                </div>
+                <div>
+                  <span className="font-semibold">
+                    Video Presentation
+                  </span>{" "}
+                  :{" "}
+                  <a href={videoURL} target="_blank" className="text-blue-400">
+                    {filename.videopresentation_path}
+                  </a>
+                </div>
               </div>
             </div>
             <div className="text-center mt-16">
               <button
                 onClick={() => setStep(3)}
                 className="px-8 py-2 bg-blue-unisec cursor-pointer text-white rounded-full hover:bg-blue-900 mx-2">
-                <FontAwesomeIcon
-                  icon={["fas", "chevron-left"]}
-                  className="w-5"
-                />{" "}
+                {"< "}
                 Previous
               </button>
               <button
@@ -1181,26 +1160,10 @@ export default function Home() {
                     .set(true);
                 }}
                 className="px-8 py-2 bg-blue-unisec cursor-pointer text-white rounded-full hover:bg-blue-900 mx-2">
-                Next{" "}
-                <FontAwesomeIcon
-                  icon={["fas", "chevron-right"]}
-                  className="w-5"
-                />
+                Next{" >"}
               </button>
             </div>
           </div>
-          {/* <div className="container mx-auto mt-5 pb-40 px-10 md:p-20 md:pt-10">
-            <div>
-              <img src="/progressbar5.svg" className="w-100 mx-auto" alt="" />
-            </div>
-            <div className="my-20 text-center">
-              <h1 className="font-bold text-2xl">
-                Thanks for submitted your project !
-              </h1>
-              <h2 className="font-bold text-xl mt-4">Join our <img src="/discord_logo.svg" className="w-10 inline" alt=""/> Discord !</h2>
-              <div className="flex flex-col items-center justify-center mt-4"><img src="/discord_unisec.png" className="shadow-lg" alt=""/></div>
-            </div>
-          </div> */}
           <Footer nonbgcolored />
         </div>
       );
