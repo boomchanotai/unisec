@@ -196,10 +196,15 @@ export default function Home() {
     }
   }, [teamMemberCounter]);
 
-  const handleTeamPeople = async (number) => {
-    (parseInt(teamMemberCounter) +number) >= 1
-      ? setTeamMemberCounter(parseInt(teamMemberCounter) +number)
+  const handleTeamPeople = async (number, state) => {
+    if (state === 'addMember') {
+      (parseInt(teamMemberCounter) + parseInt(number)) >= 1
+      ? setTeamMemberCounter(parseInt(teamMemberCounter) + parseInt(number))
       : setTeamMemberCounter(1);
+    } else {
+      setTeamMemberCounter(parseInt(number))
+    }
+    
     await setMember(member);
   };
 
@@ -412,7 +417,7 @@ export default function Home() {
                 <form onSubmit={handleTeamMember}>
                   <input
                     value={teamMemberCounter}
-                    onChange={handleTeamPeople}
+                    onChange={(e) => handleTeamPeople(parseInt(e.target.value), 'setMember')}
                     type="number"
                     className="mt-4 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                     placeholder="Team Members"
@@ -613,7 +618,7 @@ export default function Home() {
             {(i == teamMemberCounter -1 && i != 0) ? (
               <div 
                 className="absolute top-4 right-4 cursor-pointer"
-                onClick={() => handleTeamPeople(-1)}
+                onClick={() => handleTeamPeople(-1, 'addMember')}
               >
                 <FontAwesomeIcon
                   icon={["fas", "minus-circle"]}
@@ -639,7 +644,7 @@ export default function Home() {
                   <div className="flex flex-col justify-center items-center md:items-start p-16">
                     <div 
                       className="cursor-pointer text-white hover:text-gray-300 duration-300"
-                      onClick={() => handleTeamPeople(1)}
+                      onClick={() => handleTeamPeople(1, 'addMember')}
                     >
                       <FontAwesomeIcon
                         icon={["fas", "plus-circle"]}
